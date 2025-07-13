@@ -5,6 +5,7 @@ import '../providers/cart_provider.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   final ProductModel product;
+
   const ProductDetailScreen({super.key, required this.product});
 
   @override
@@ -12,7 +13,8 @@ class ProductDetailScreen extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(product.title)),
+      backgroundColor: Colors.white,
+      appBar: AppBar(backgroundColor: Colors.white, title: Text(product.title)),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -21,15 +23,20 @@ class ProductDetailScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Text(product.description),
             const SizedBox(height: 20),
-            Text("\$${product.price}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            Text(
+              "\$${product.price}",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             const Spacer(),
             ElevatedButton(
               onPressed: () {
                 cartProvider.addToCart(product);
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Added to Cart")));
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text("Added to Cart")));
               },
               child: const Text("Add to Cart"),
-            )
+            ),
           ],
         ),
       ),
